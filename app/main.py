@@ -4,6 +4,7 @@ from database.models import Base
 from database.models import Department
 from database.connection import async_session
 from sqlalchemy.sql import select
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
@@ -17,11 +18,9 @@ async def init_tables():
 @app.get("/")
 async def root():
     async with async_session.begin() as session:
-        stmt = select(Department)
-        data = await session.scalars(stmt)
-        for dep in data.all():
-            print(dep.dept_name)
-    return data.all()
+        data = await session.execute(select(Department))
+        depts = [row._asdict() for row in data.scalars()]
+    return JSONResponse(content=depts)
 
 
 @app.get("/hello/{name}")
