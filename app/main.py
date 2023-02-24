@@ -15,14 +15,9 @@ async def init_tables():
         await conn.run_sync(Base.metadata.create_all)
 
 
-@app.get("/")
+@app.get("/department/all")
 async def root():
     async with async_session.begin() as session:
         data = await session.execute(select(Department))
         depts = [row._asdict() for row in data.scalars()]
     return JSONResponse(content=depts)
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
