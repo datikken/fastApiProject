@@ -1,5 +1,5 @@
-from ..database.models import Department
-from ..database.connection import async_session
+from app.models.department import Department
+from app.database.connection import async_session
 from sqlalchemy.sql import select
 from fastapi.encoders import jsonable_encoder
 

@@ -1,4 +1,4 @@
-from ..database.models import Employee
+from ..models.employee import Employee
 from ..database.connection import async_session
 from sqlalchemy.sql import select
 from fastapi.encoders import jsonable_encoder

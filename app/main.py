@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from app.database.connection import engine
-from app.database.models import Base
 from app.service.employee import employeeService
 from app.service.department import departmentService
+from app.models import Base
 
 app = FastAPI()
 
