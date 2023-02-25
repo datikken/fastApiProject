@@ -4,8 +4,10 @@ from app.database.connection import engine
 from app.service.employee import employeeService
 from app.service.department import departmentService
 from app.models import Base
+from app.graphql.schema import graphql_app
 
 app = FastAPI()
+app.include_router(graphql_app, prefix="/graphql")
 
 
 @app.on_event('startup')
